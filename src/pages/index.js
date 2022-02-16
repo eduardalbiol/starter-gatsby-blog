@@ -34,7 +34,7 @@ export const pageQuery = graphql`
         slug
         publishDate(formatString: "MMMM Do, YYYY")
         tags
-        heroImage {
+      #  heroImage {
           gatsbyImageData(
             layout: FULL_WIDTH
             placeholder: BLURRED
@@ -49,7 +49,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    allContentfulPerson(
+  #  allContentfulPerson(
       filter: { contentful_id: { eq: "15jwOBqpxqSAOy2eOO4S0m" } }
     ) {
       nodes {

@@ -78,12 +78,12 @@ export const pageQuery = graphql`
     contentfulBlogPost(slug: { eq: $slug }) {
       slug
       title
-      author {
+     # author {
         name
       }
       publishDate(formatString: "MMMM Do, YYYY")
       rawDate: publishDate
-      heroImage {
+    #  heroImage {
         gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, width: 1280)
         resize(height: 630, width: 1200) {
           src
