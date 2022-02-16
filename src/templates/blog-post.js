@@ -24,7 +24,7 @@ class BlogPostTemplate extends React.Component {
         <Hero
           image={post.image?.gatsbyImageData}
           title={post.title}
-          content={post.textContent?.childMarkdownRemark?.excerpt}
+        // content={post.textContent?.childMarkdownRemark?.excerpt}
         />
         <div className={styles.container}>
           <span className={styles.meta}>
@@ -32,6 +32,8 @@ class BlogPostTemplate extends React.Component {
             <time dateTime={post.rawDate}>{post.publishDate}</time> –{' '}
             {post.body?.childMarkdownRemark?.timeToRead} minute read
           </span>
+
+
           <div className={styles.article}>
             <div
               className={styles.body}
@@ -83,12 +85,18 @@ export const pageQuery = graphql`
       image {
         gatsbyImageData
       }
-      textContent {
-        raw
-      }
-
-
     }
+
+    allContentfulBlogPostParagraph1TextNode {
+      edges {
+        node {
+          internal {
+            content
+          }
+        }
+      }
+    }
+
     previous: contentfulBlogPost(slug: { eq: $previousPostSlug }) {
       slug
       title
