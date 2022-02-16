@@ -18,17 +18,17 @@ class BlogPostTemplate extends React.Component {
       <Layout location={this.props.location}>
         <Seo
           title={post.title}
-          description={post.description.childMarkdownRemark.excerpt}
-          image={`http:${post.heroImage.resize.src}`}
+        // textContent={post.textContent.childMarkdownRemark.excerpt}
+        // image={`http:${post.image.resize.src}`}
         />
         <Hero
-          image={post.heroImage?.gatsbyImageData}
+          image={post.image?.gatsbyImageData}
           title={post.title}
-          content={post.description?.childMarkdownRemark?.excerpt}
+          content={post.textContent?.childMarkdownRemark?.excerpt}
         />
         <div className={styles.container}>
           <span className={styles.meta}>
-            {post.author?.name} &middot;{' '}
+            {/* {post.author?.name} &middot;{' '} */}
             <time dateTime={post.rawDate}>{post.publishDate}</time> –{' '}
             {post.body?.childMarkdownRemark?.timeToRead} minute read
           </span>
@@ -78,29 +78,16 @@ export const pageQuery = graphql`
     contentfulBlogPost(slug: { eq: $slug }) {
       slug
       title
-     # author {
-        name
-      }
       publishDate(formatString: "MMMM Do, YYYY")
       rawDate: publishDate
-    #  heroImage {
-        gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, width: 1280)
-        resize(height: 630, width: 1200) {
-          src
-        }
+      image {
+        gatsbyImageData
       }
-      body {
-        childMarkdownRemark {
-          html
-          timeToRead
-        }
+      textContent {
+        raw
       }
-      tags
-      description {
-        childMarkdownRemark {
-          excerpt
-        }
-      }
+
+
     }
     previous: contentfulBlogPost(slug: { eq: $previousPostSlug }) {
       slug
