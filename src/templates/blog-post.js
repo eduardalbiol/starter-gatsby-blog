@@ -11,6 +11,8 @@ import * as styles from './blog-post.module.css'
 class BlogPostTemplate extends React.Component {
   render() {
     const post = get(this.props, 'data.contentfulBlogPost')
+    const paragraph1 = get(this.props, 'data.contentfulBlogPostParagraph1TextNode')
+    const paragraph2 = get(this.props, 'data.contentfulBlogPostParagraph2TextNode')
     const previous = get(this.props, 'data.previous')
     const next = get(this.props, 'data.next')
 
@@ -32,6 +34,9 @@ class BlogPostTemplate extends React.Component {
             <time dateTime={post.rawDate}>{post.publishDate}</time> –{' '}
             {post.body?.childMarkdownRemark?.timeToRead} minute read
           </span>
+
+          <div style={{ marginBottom: "30px", marginTop: "30px" }} >{paragraph1.internal?.content}</div>
+          <div>{paragraph2.internal?.content}</div>
 
 
           <div className={styles.article}>
@@ -87,13 +92,15 @@ export const pageQuery = graphql`
       }
     }
 
-    allContentfulBlogPostParagraph1TextNode {
-      edges {
-        node {
-          internal {
-            content
-          }
-        }
+    contentfulBlogPostParagraph1TextNode {
+      internal {
+        content
+      }
+    }
+
+    contentfulBlogPostParagraph2TextNode {
+      internal {
+        content
       }
     }
 
